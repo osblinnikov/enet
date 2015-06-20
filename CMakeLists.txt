@@ -50,16 +50,16 @@ if(HAS_SOCKLEN_T)
     add_definitions(-DHAS_SOCKLEN_T=1)
 endif()
  
-include_directories(${PROJECT_SOURCE_DIR}/include)
+include_directories(${PROJECT_SOURCE_DIR})
  
 add_library(enet STATIC
-        callbacks.c
-        compress.c
-        host.c
-        list.c
-        packet.c
-        peer.c
-        protocol.c
-        unix.c
-        win32.c
+        src/callbacks.c
+        src/compress.c
+        src/host.c
+        src/list.c
+        src/packet.c
+        src/peer.c
+        src/protocol.c
+        src/unix.c
+        src/win32.c
     )

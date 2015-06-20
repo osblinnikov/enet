@@ -1,0 +1,6 @@
+.scon*
+*.tmp
+build
+Release
+Debug
+config.log
