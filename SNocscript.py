@@ -35,4 +35,8 @@ defineIfFuncExists(env, c, 'gethostbyaddr_r', 'HAS_GETHOSTBYADDR_R=1')
 defineIfFuncExists(env, c, 'inet_pton', 'HAS_INET_PTON=1')
 defineIfFuncExists(env, c, 'inet_ntop', 'HAS_INET_NTOP=1')
 
+if "vc" not in env["COMPILER"]:
+    c['defines'] += ["HAS_SOCKLEN_T=1"]
+    c['defines'] += ["HAS_MSGHDR_FLAGS=1"]
+
 DefaultLibraryConfig(env, c)
