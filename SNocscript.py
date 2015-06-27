@@ -12,31 +12,30 @@ def add_dependencies(env):
 #  AddPthreads(env)
   AddNetwork(env)
 
-def defineIfFuncExists(env, c, funcName, define):
-    conf = Configure(env['scons'])
-    if conf.CheckFunc(funcName):
-        c['defines'] += [define]
-    env['scons'] = conf.Finish()
-
 c = {}
-c['PROG_NAME'] = 'enet_osblinnikov_github_com'
-# c['sourceFiles'] = ['types.c']
-c['testFiles'] = ['enetTests.c']
 # c['runFiles'] = ['main.c']
+# c['sourceFiles'] = ['types.c']
+c['PROG_NAME'] = 'enet_osblinnikov_github_com'
+c['testFiles'] = ['enetTests.c']
 c['inclDeps'] = add_dependencies
 c['defines'] = []
-
-defineIfFuncExists(env, c, 'fcntl', 'HAS_FCNT=1')
-defineIfFuncExists(env, c, 'poll', 'HAS_POLL=1')
-defineIfFuncExists(env, c, 'getaddrinfo', 'HAS_GETADDRINFO=1')
-defineIfFuncExists(env, c, 'getnameinfo', 'HAS_GETNAMEINFO=1')
-defineIfFuncExists(env, c, 'gethostbyname_r', 'HAS_GETHOSTBYNAME_R=1')
-defineIfFuncExists(env, c, 'gethostbyaddr_r', 'HAS_GETHOSTBYADDR_R=1')
-defineIfFuncExists(env, c, 'inet_pton', 'HAS_INET_PTON=1')
-defineIfFuncExists(env, c, 'inet_ntop', 'HAS_INET_NTOP=1')
 
 if "vc" not in env["COMPILER"]:
     c['defines'] += ["HAS_SOCKLEN_T=1"]
     c['defines'] += ["HAS_MSGHDR_FLAGS=1"]
+
+def defineIfFuncExists(funcName, define):
+    conf = Configure(env['scons'])
+    if conf.CheckFunc(funcName):
+        c['defines'] += [define]
+    env['scons'] = conf.Finish()
+defineIfFuncExists('fcntl', 'HAS_FCNT=1')
+defineIfFuncExists('poll', 'HAS_POLL=1')
+defineIfFuncExists('getaddrinfo', 'HAS_GETADDRINFO=1')
+defineIfFuncExists('getnameinfo', 'HAS_GETNAMEINFO=1')
+defineIfFuncExists('gethostbyname_r', 'HAS_GETHOSTBYNAME_R=1')
+defineIfFuncExists('gethostbyaddr_r', 'HAS_GETHOSTBYADDR_R=1')
+defineIfFuncExists('inet_pton', 'HAS_INET_PTON=1')
+defineIfFuncExists('inet_ntop', 'HAS_INET_NTOP=1')
 
 DefaultLibraryConfig(env, c)
