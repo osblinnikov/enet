@@ -21,7 +21,7 @@ def defineIfFuncExists(env, c, funcName, define):
 c = {}
 c['PROG_NAME'] = 'enet_osblinnikov_github_com'
 # c['sourceFiles'] = ['types.c']
-#c['testFiles'] = ['typesTest.c']
+c['testFiles'] = ['enetTests.c']
 # c['runFiles'] = ['main.c']
 c['inclDeps'] = add_dependencies
 c['defines'] = []
